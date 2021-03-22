@@ -1,0 +1,35 @@
+.home {
+    .home-header {
+        .home-title {
+            text-align: center;
+        }
+
+        .home-filters {
+            display: flex;
+
+            .home-filters-search {
+                padding: 10px 0;
+                display: flex;
+                justify-content: flex-start;
+              
+                .form-control {
+                  padding-left: 43px;
+                  background-color: #0B1641;
+                  border: none;
+                  border-radius: 8px;
+                  font-size: 14px;
+                  //font-weight: 200;
+                  color: #fff;
+                }
+              
+                i {
+                  position: absolute;
+                  color: #50555A;
+                  padding: 10px;
+                  font-size: 1rem;
+                  top: 125px;
+                }
+            }
+        }
+    }
+}

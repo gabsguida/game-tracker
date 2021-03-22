@@ -1,0 +1,28 @@
+.header {
+    background: #0B1641;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    top: 0;
+    left: 0;
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+
+    .header-container {
+        height: 50px;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .header {
+        .header-container {
+            justify-content: start;
+            
+            img {
+                padding-left: 130px;
+            }
+        }
+    }
+}

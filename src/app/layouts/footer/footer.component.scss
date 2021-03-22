@@ -1,0 +1,39 @@
+.footer {
+    background-color: #0B1641;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+   // flex-shrink: 0; // TIRAR OU NÃO?
+    padding: 8px;
+
+    .footer-logo {
+        display: flex;
+        justify-content: center;
+        padding: 14px 0;
+    }
+
+    .footer-text {
+        padding-bottom: 12px;
+        p {
+            font-size: 10px;
+            font-weight: 300;
+            text-align: center;
+        }
+    }
+
+    .footer-links {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 7px;
+
+        a {
+            font-size: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            color: #fff;
+            padding-bottom: 8px;
+        }
+    }
+}
