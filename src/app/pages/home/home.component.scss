@@ -211,6 +211,7 @@
 
       .home-title {
         text-align: start;
+        font-size: 30px;
       }
 
       .home-filters {
@@ -218,7 +219,7 @@
         margin-bottom: 37px;
 
         .home-filters-search {
-          width: auto;
+          width: 380px;
         }
 
         .home-filters-select {
@@ -228,11 +229,16 @@
 
           .home-filters-select-label {
             margin-right: 20px;
+            font-size: 18px;
           }
 
           .form-group {
-            width: auto;
+            width: 180px;
             margin-bottom: 0;
+
+            ::ng-deep .ng-select .ng-select-container .ng-value-container {
+              padding-left: 20px;
+            }
           }
         }
       }
