@@ -1,20 +1,65 @@
 <div class="home">
-    <div class="home-header">
-        <h3 class="home-title">Ofertas</h3>
-        <div class="home-filters">
-            <form class="home-filters-search" [formGroup]="searchForm">
-                <input class="form-control home-filters-search-input" type="text"
-                  placeholder="Procurar" formControlName="gameText" />
-                <i class="fas fa-search home-filters-search-input-icon"></i>
-            </form>
-            <div class="home-filters-select">
-                
-            </div>
-        </div>
-    </div>
-    <div class="home-content">
-        <div>
+  <div class="home-header">
+    <h1 class="home-title">Ofertas</h1>
+    <div class="home-filters" [formGroup]="searchForm">
+      <div class="home-filters-search">
+        <input
+          class="form-control home-filters-search-input"
+          type="text"
+          placeholder="Procurar"
+          formControlName="gameText"
+        />
+        <img src="../../../assets/images/search_24px.svg" alt="Procurar" />
+      </div>
 
+      <div class="home-filters-select">
+        <label class="home-filters-select-label">{{isMobile ? 'Ordenar por' : 'Ordenar por:' }}</label>
+        <div class="form-group">
+          <ng-select
+            [items]="selectFilterOptions"
+            bindValue="Id"
+            bindLabel="Name"
+            formControlName="selectFilter"
+            notFoundText="Nenhum item encontrado!"
+            [searchable]="false"
+            [clearable]="false"
+          >
+          </ng-select>
         </div>
+      </div>
     </div>
+  </div>
+  <div class="home-content">
+    <div *ngFor="let offer of offersList; let index = in" class="home-card card">
+      <div class="card-body p-0">
+        <div class="home-card-thumb">
+          <img [src]="offer.thumb" [alt]="offer.title" />
+        </div>
+        <div class="home-card-info">
+          <h3>{{ offer.title }}</h3>
+          <div class="home-card-details">
+            <button class="btn btn-card">DETALHES</button>
+            <div class="home-card-details-price">
+              <div class="home-card-sale-details">
+                <ng-container *ngIf="offer.salePrice != null; else elseNormalPrice">
+                  <p class="home-card-normal-price offer">$ {{ offer.normalPrice }}</p>
+                  <p class="home-card-sale-price">$ {{ offer.salePrice }}</p>
+                </ng-container>
+                <ng-template #elseNormalPrice>
+                  <p class="home-card-normal-price">$ {{ offer.normalPrice }}</p>
+                </ng-template>
+              </div>
+              
+              <div *ngIf="offer.salePrice != null" class="home-card-percentage">
+                  {{ offer.percentage == 0 ? 'GRÁTIS' : '-' + offer.percentage + '%' }}
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>      
+    </div>
+  </div>  
+  <div class="bottom-btn">
+    <button class="btn btn-load-cards">Carregar mais</button>
+  </div>
 </div>

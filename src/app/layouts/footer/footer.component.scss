@@ -1,9 +1,7 @@
 .footer {
     background-color: #0B1641;
-    position: absolute;
-    bottom: 0;
     width: 100%;
-   // flex-shrink: 0; // TIRAR OU NÃO?
+    flex-shrink: 0;
     padding: 8px;
 
     .footer-logo {
@@ -34,6 +32,33 @@
             font-weight: 700;
             color: #fff;
             padding-bottom: 8px;
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .footer {
+        padding: 61px 130px;
+
+        .footer-logo {
+            padding-bottom: 32px;
+            padding-top: 0;
+        }
+
+        .footer-text {
+            p {
+                text-align: start;
+                font-size: 14px;
+            }
+        }
+
+        .footer-links {
+            flex-direction: row;
+            justify-content: flex-start;
+
+            a {
+                margin-right: 46px;
+            }
         }
     }
 }

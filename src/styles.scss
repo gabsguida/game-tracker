@@ -19,3 +19,7 @@ body {
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+
+
+/* Importing ng-select css file */
+@import "~@ng-select/ng-select/themes/default.theme.css";

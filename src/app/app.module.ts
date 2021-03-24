@@ -4,6 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -24,7 +25,8 @@ import { TopbarComponent } from './layouts/topbar/topbar.component';
     NgbModule,
     //NgbDropdownModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

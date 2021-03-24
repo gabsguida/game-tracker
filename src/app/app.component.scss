@@ -10,9 +10,17 @@
     background: -ms-gradient(linear, left top, left bottom, from(#0B1641), to(#C70160)) fixed;
     background: -o-gradient(linear, left top, left bottom, from(#0B1641), to(#C70160)) fixed;
     background: linear-gradient(45deg, #0B1641 0%, #C70160 100%);
-    min-height: 80vh;
+   // min-height: 80vh;
 
     .content-wrapper {
         padding: 16px 8px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .wrapper {
+        .content-wrapper {
+            padding: 16px 50px;
+        }
     }
 }
