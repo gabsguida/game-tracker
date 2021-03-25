@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { IGame } from '../../shared/models/utils.model';
+import { OffersService } from '../services/offers.service';
 import { offers } from './mock';
 
 @Component({
@@ -13,8 +14,8 @@ import { offers } from './mock';
 export class HomeComponent implements OnInit, OnDestroy {
   dropdownOption: string;
   searchForm: FormGroup;
-  offersList: IGame[] = offers;
-  offersListImutable: IGame[] = offers;
+  offersList: IGame[] = [];
+  offersListImutable: IGame[] = [];
   selectFilterOptions: any[] = [
     {
       Id: 1,
@@ -40,10 +41,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   isMobile: boolean = false;
   searchOfferSubscription: Subscription;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private offersService: OffersService) {}
 
   ngOnInit(): void {
-    this.setSalePricePercentage();
+    //this.setSalePricePercentage();
+    this.checkDevice();
+    this.getOffers();
+    this.setSelectFilter('DiscountPercentage');
 
     this.searchForm = this.fb.group({
       gameText: [''],
@@ -63,10 +67,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.offersList = this.offersListImutable;
       }
     })
-
-    this.checkDevice();
-
-    this.setSelectFilter('DiscountPercentage');
   }
 
   ngOnDestroy() {
@@ -77,7 +77,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     return parseFloat(price.replace(',', '.'));
   }
 
-  setSalePricePercentage() {
+  setSalePricePercentage(offers) {
     let offersWithPercentage = offers.map(offer => {
       const salePriceNumeric = this.convertPriceToNumber(offer.salePrice);
       const normalPriceNumeric = this.convertPriceToNumber(offer.normalPrice);
@@ -129,6 +129,30 @@ export class HomeComponent implements OnInit, OnDestroy {
         })
         break;
     }
+  }
+
+  getOffers() {
+    const params = {
+      pageNumber: 0,
+      pageSize: 12,
+      onSale: 1,
+      AAA: 1
+    };
+
+    this.offersService.getOffers(params).subscribe((res: IGame[]) => {
+      let resultWithCorrectThumb = [];
+      res.forEach(offer => {
+        offer.thumb = this.getOfferThumb(offer.steamAppID);
+      });
+
+      resultWithCorrectThumb = res;
+      this.setSalePricePercentage(resultWithCorrectThumb);
+    })
+  }
+
+  getOfferThumb(steamAppID: string) {
+    const thumb = `https://cdn.akamai.steamstatic.com/steam/apps/${steamAppID}/header.jpg`;
+    return steamAppID == null ? '../assets/images/sem-imagem.jpg' : thumb;
   }
 
 }
