@@ -23,6 +23,7 @@
             notFoundText="Nenhum item encontrado!"
             [searchable]="false"
             [clearable]="false"
+            (change)="setSelectFilter($event.Type)"
           >
           </ng-select>
         </div>
@@ -37,22 +38,23 @@
         </div>
         <div class="home-card-info">
           <h3>{{ offer.title }}</h3>
-          <div class="home-card-details">
-            <button class="btn btn-card">DETALHES</button>
-            <div class="home-card-details-price">
-              <div class="home-card-sale-details">
-                <ng-container *ngIf="offer.salePrice != null; else elseNormalPrice">
-                  <p class="home-card-normal-price offer">$ {{ offer.normalPrice }}</p>
-                  <p class="home-card-sale-price">$ {{ offer.salePrice }}</p>
-                </ng-container>
-                <ng-template #elseNormalPrice>
-                  <p class="home-card-normal-price">$ {{ offer.normalPrice }}</p>
-                </ng-template>
-              </div>
-              
-              <div *ngIf="offer.salePrice != null" class="home-card-percentage">
-                  {{ offer.percentage == 0 ? 'GRÁTIS' : '-' + offer.percentage + '%' }}
-                </div>
+        </div>
+        
+        <div class="home-card-details">
+          <button class="btn btn-card">DETALHES</button>
+          <div class="home-card-details-price">
+            <div class="home-card-sale-details">
+              <ng-container *ngIf="offer.salePrice != null; else elseNormalPrice">
+                <p class="home-card-normal-price offer">$ {{ offer.normalPrice }}</p>
+                <p class="home-card-sale-price">$ {{ offer.salePrice }}</p>
+              </ng-container>
+              <ng-template #elseNormalPrice>
+                <p class="home-card-normal-price">$ {{ offer.normalPrice }}</p>
+              </ng-template>
+            </div>
+            
+            <div *ngIf="offer.salePrice != null" class="home-card-percentage">
+                {{ offer.percentage.toFixed(0) == '100' ? 'GRÁTIS' : '-' + offer.percentage.toFixed(0) + '%' }}
             </div>
           </div>
         </div>

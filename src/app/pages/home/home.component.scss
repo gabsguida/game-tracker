@@ -135,54 +135,55 @@
           text-align: start ;
         }
 
-        .home-card-details {
+        
+      }
+      .home-card-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 10px 16px;
+
+        .btn-card {
+          background-color: #C70160;
+          border-radius: 7px;
+          font-size: 14px;
+          font-weight: 700;
+          color: #fff;
+        }
+
+        .home-card-details-price {
           display: flex;
-          justify-content: space-between;
           align-items: center;
 
-          .btn-card {
-            background-color: #C70160;
+          p {
+            margin-bottom: 0;
+          }
+
+          .home-card-sale-details {
+            margin-right: 10px;
+
+            .home-card-normal-price.offer {
+              text-decoration: line-through;
+              font-size: 10px;
+              font-weight: 200;
+            }
+
+            .home-card-sale-price,
+            .home-card-normal-price{
+              font-size: 14px;
+              font-weight: bold;
+            }
+          }
+          
+          .home-card-percentage {
+            background-color: #16857B;
             border-radius: 7px;
             font-size: 14px;
             font-weight: 700;
-            color: #fff;
-          }
-
-          .home-card-details-price {
-            display: flex;
-            align-items: center;
-
-            p {
-              margin-bottom: 0;
-            }
-
-            .home-card-sale-details {
-              margin-right: 10px;
-
-              .home-card-normal-price.offer {
-                text-decoration: line-through;
-                font-size: 10px;
-                font-weight: 200;
-              }
-
-              .home-card-sale-price,
-              .home-card-normal-price{
-                font-size: 14px;
-                font-weight: bold;
-              }
-            }
-            
-            .home-card-percentage {
-              background-color: #16857B;
-              border-radius: 7px;
-              font-size: 14px;
-              font-weight: 700;
-              padding: 0.375rem 0;
-              width: 64px;
-              text-align: center;
-            }
-                        
-          }
+            padding: 0.375rem 0;
+            width: 64px;
+            text-align: center;
+          }                      
         }
       }
     }    
@@ -220,6 +221,10 @@
 
         .home-filters-search {
           width: 380px;
+
+          .form-control {
+            font-size: 18px;
+          }
         }
 
         .home-filters-select {
@@ -238,19 +243,51 @@
 
             ::ng-deep .ng-select .ng-select-container .ng-value-container {
               padding-left: 20px;
+              font-size: 18px;
+            }
+
+            ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+              font-size: 18px;
             }
           }
         }
       }
     }
     .home-content {
-      grid-template-columns: repeat(3,minmax(200px,auto));
+      grid-template-columns: minmax(200px, 1fr) 1fr;
       display: grid;
       gap: 10px;
 
       .home-card {
         margin: 0;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+        .home-card-info {
+          h3 {
+            font-size: 24px;
+          }
+        }
+        .home-card-details {
+          .btn-card {
+            font-size: 18px;
+          }
+
+          .home-card-details-price {
+            .home-card-sale-details {
+              .home-card-normal-price.offer {
+                font-size: 12px;
+              }
+
+              .home-card-sale-price {
+                font-size: 18px;
+              }
+            }
+            .home-card-percentage {
+              font-size: 18px;
+              width: 84px;
+            }
+          }
+        }
       }
     }
 
@@ -263,4 +300,19 @@
       }
     }
   }
+}
+
+@media screen and (min-width: 1024px) {
+  .home {
+    .home-content {
+      grid-template-columns: minmax(200px, 1fr) 1fr 1fr;
+    }
+  }
+}
+
+// adding flexbox to fix home-card-details spacing
+.card-body {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }

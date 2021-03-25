@@ -20,7 +20,15 @@
 @media screen and (min-width: 1024px) {
     .wrapper {
         .content-wrapper {
-            padding: 16px 50px;
+            padding: 16px 40px;
+        }
+    }
+}
+
+@media screen and (min-width: 1044px) {
+    .wrapper {
+        .content-wrapper {
+            padding: 16px 130px;
         }
     }
 }

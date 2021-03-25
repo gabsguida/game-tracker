@@ -19,9 +19,25 @@
     .header {
         .header-container {
             justify-content: start;
-            
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .header {
+        .header-container {
             img {
-                padding-left: 130px;
+                padding-left: 30px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1044px) {
+    .header {
+        .header-container {
+            img {
+                padding-left: 120px;
             }
         }
     }
