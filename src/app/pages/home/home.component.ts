@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { IGame } from '../../shared/models/utils.model';
 import { OffersService } from '../services/offers.service';
-import { offers } from './mock';
 
 @Component({
   selector: 'app-home',
@@ -44,14 +43,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder, private offersService: OffersService) {}
 
   ngOnInit(): void {
-    //this.setSalePricePercentage();
     this.checkDevice();
     this.getOffers();
-    this.setSelectFilter('DiscountPercentage');
 
     this.searchForm = this.fb.group({
       gameText: [''],
-      selectFilter: [1]
+      selectFilter: ['DiscountPercentage']
     });
     this.searchOfferSubscription = this.searchForm.get('gameText').valueChanges.pipe(
       debounceTime(500),
@@ -66,6 +63,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       } else {
         this.offersList = this.offersListImutable;
       }
+      this.setSelectFilter(this.searchForm.get('selectFilter').value)
     })
   }
 
@@ -77,15 +75,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     return parseFloat(price.replace(',', '.'));
   }
 
-  setSalePricePercentage(offers) {
+  replacePriceDotsToComma(price: string) {
+    return price.replace('.', ',')
+  }
+
+  setPriceNumeric(offers: IGame[]) {
     let offersWithPercentage = offers.map(offer => {
       const salePriceNumeric = this.convertPriceToNumber(offer.salePrice);
       const normalPriceNumeric = this.convertPriceToNumber(offer.normalPrice);
-
-      let percentageResult = (1 - salePriceNumeric / normalPriceNumeric) * 100;
+      const savingsNumeric = this.convertPriceToNumber(offer.savings);
 
       return {
-        percentage: percentageResult,
+        percentage: savingsNumeric,
         salePriceNumeric: salePriceNumeric,
         normalPriceNumeric: normalPriceNumeric,
         ...offer
@@ -143,10 +144,13 @@ export class HomeComponent implements OnInit, OnDestroy {
       let resultWithCorrectThumb = [];
       res.forEach(offer => {
         offer.thumb = this.getOfferThumb(offer.steamAppID);
+        offer.salePrice = this.replacePriceDotsToComma(offer.salePrice);
+        offer.normalPrice = this.replacePriceDotsToComma(offer.normalPrice);
       });
 
       resultWithCorrectThumb = res;
-      this.setSalePricePercentage(resultWithCorrectThumb);
+      this.setPriceNumeric(resultWithCorrectThumb);
+      this.setSelectFilter('DiscountPercentage');
     })
   }
 

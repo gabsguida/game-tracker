@@ -17,7 +17,7 @@
         <div class="form-group">
           <ng-select
             [items]="selectFilterOptions"
-            bindValue="Id"
+            bindValue="Type"
             bindLabel="Name"
             formControlName="selectFilter"
             notFoundText="Nenhum item encontrado!"
@@ -50,8 +50,7 @@
               <ng-template #elseNormalPrice>
                 <p class="home-card-normal-price">$ {{ offer.normalPrice }}</p>
               </ng-template>
-            </div>
-            
+            </div>            
             <div *ngIf="offer.salePrice != null" class="home-card-percentage">
                 {{ offer.percentage.toFixed(0) == '100' ? 'GRÁTIS' : '-' + offer.percentage.toFixed(0) + '%' }}
             </div>

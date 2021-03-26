@@ -7,19 +7,19 @@ interface IGame {
     normalPriceNumeric?: number,
     salePriceNumeric?: number
     dealID?: string
-    dealRating: string
-    gameID: string
-    internalName: string
-    isOnSale: string
-    lastChange: number
-    metacriticLink: string
-    metacriticScore: string
-    releaseDate: number
+    dealRating?: string
+    gameID?: string
+    internalName?: string
+    isOnSale?: string
+    lastChange?: number
+    metacriticLink?: string
+    metacriticScore?: string
+    releaseDate?: number
     savings: string
     steamAppID: null
-    steamRatingCount: string
-    steamRatingPercent: string
-    steamRatingText: string
+    steamRatingCount?: string
+    steamRatingPercent?: string
+    steamRatingText?: string
     storeID: string
 }
 
